@@ -45,3 +45,39 @@ window.onscroll = () => {
   cartItemsContainer.classList.remove("active");
   searchForm.classList.remove("active");
 };
+
+let cartItem = document.querySelector(".cart-items-container");
+let checkoutBtn = document.querySelector("#checkout-btn--click");
+
+checkoutBtn.addEventListener("click", function (e) {
+  e.preventDefault;
+  let items = [];
+  for (let i = 1; i < cartItem.childElementCount; i++) {
+    let cartItemName;
+    let cartItemQuantity;
+    let cartItemNth;
+    cartItemNth = document.querySelector(
+      `.cart-items-container .cart-item:nth-child(${i})`
+    );
+    cartItemName = cartItemNth.querySelector(".content h3").innerHTML;
+    cartItemQuantity = cartItemNth.querySelector(".content .price").innerHTML;
+    items.push({
+      productName: cartItemName,
+      productQty: cartItemQuantity,
+    });
+  }
+  console.log("items", items);
+});
+
+for (let i = 1; i < cartItem.childElementCount; i++) {
+  let cartItemNth;
+  cartItemNth = document.querySelector(
+    `.cart-items-container .cart-item:nth-child(${i})`
+  );
+  cartItemNth.onclick = () => {
+    console.log("cartItemNth", cartItemNth);
+    let elementDataId = cartItemNth.getAttribute("data-id");
+    console.log("data-id", elementDataId);
+    cartItemNth.remove();
+  };
+}
